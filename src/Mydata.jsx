@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import "./Mydata.css";
 
 const Mydata = () => {
   const [data, setData] = useState([]);
+  const [indicate, setIndicate] = useState("");
   const [dataVisible, setDataVisible] = useState(false);
-  const [dataFetched, setDataFetched] = useState(false); // New state to track if data has been fetched
+  const [dataFetched, setDataFetched] = useState(false);
 
   const handleData = async () => {
     // Toggle data visibility
@@ -24,20 +26,36 @@ const Mydata = () => {
     }
   };
 
+  useEffect(() => {
+    // Show "Loading..." if data is being fetched
+    if (dataVisible && !dataFetched) {
+      setIndicate("Loading.....");
+    } else {
+      setIndicate("");
+    }
+  }, [dataVisible, dataFetched]);
+
   return (
     <>
-      <h1>Apna Data Show Karna hai</h1>
-      <button onClick={handleData}>
-        {dataVisible ? "Hide Messages" : "Show Messages"}
-      </button>
-      {dataVisible &&
-        data.map((values, id) => (
-          <div key={id} className="Container">
-            <h2>Name - {values.name}</h2>
-            <h4>Email - {values.email}</h4>
-            <h3>Message - {values.message}</h3>
-          </div>
-        ))}
+      <div className="MainContainer">
+        <div className="headingContainer">
+          <h1>Welcome to Farhan's Database 😁</h1>
+          <button onClick={handleData}>
+            {dataVisible ? "Hide Messages" : "Show Messages"}
+          </button>
+          <p>{indicate}</p>
+        </div>
+        {dataVisible &&
+          data.map((values, id) => (
+            <div key={id} className="SubContainer">
+              <h2>
+                <span>{id + 1}-</span>Name :- {values.name}
+              </h2>
+              <h4>Email :- {values.email}</h4>
+              <h3>Message :- {values.message}</h3>
+            </div>
+          ))}
+      </div>
     </>
   );
 };
