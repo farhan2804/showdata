@@ -39,7 +39,7 @@ const Mydata = () => {
     <>
       <div className="MainContainer">
         <div className="headingContainer">
-          <h1>Welcome to Farhan's Database 😁</h1>
+          <h1>Welcome to your Database, Farhan 😁</h1>
           <button onClick={handleData}>
             {dataVisible ? "Hide Messages" : "Show Messages"}
           </button>
